@@ -3,6 +3,8 @@ var moment = require('moment');
 
 var app = express();
 
+app.use(express.static('public'));
+
 app.get('/:string', function(req, res) {
 	var data = req.params.string;
 	var datafixed = data.replace(/\W+/g, "-");	
@@ -11,8 +13,11 @@ app.get('/:string', function(req, res) {
 	var naturalDate = null;
 
 	if (check.length === 1) {
-		unixDate = datafixed;
-		naturalDate = moment.unix(parseInt(datafixed)).format('MMMM D, YYYY');
+		date = moment.unix(parseInt(datafixed)).format('MMMM-DD-YYYY');
+		if (moment(date).isValid()){
+			unixDate = datafixed;
+			naturalDate = date;
+		}		
 	} else if (check.length > 1 && moment(datafixed).isValid()) {		
 		var date = moment(datafixed, 'MMMM-DD-YYYY');
 		unixDate = date.format('X');
