@@ -1,63 +1,40 @@
 var express = require('express');
-var moment = require('moment');
-
 var app = express();
+var PORT = process.env.PORT || 3000;
+var moment = require('moment');
+var bodyParser = require('body-parser');
+var calculateDate = require('./calculate-date')
 
-app.use(express.static('public'));
+var globalString = '';
+var globalUnixDate = '';
+var globalNaturalDate = '';
 
-app.get('/:string', function(req, res) {
-	var data = req.params.string;
-	var datafixed = data.replace(/\W+/g, "-");	
-	var check = datafixed.split("-");
-	var unixDate = null;
-	var naturalDate = null;
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'ejs');
 
-	console.log(check.length);
-
-
-	if (check.length === 1) {
-		date = moment.unix(parseInt(datafixed)).format('MMMM-DD-YYYY');
-		if (moment(date).isValid()){
-			unixDate = datafixed;
-			naturalDate = moment(date).format("MMMM D, YYYY");
-		}		
-	} else if (check.length > 1) {
-		if (check.length === 3){
-			var month = '';
-			var year = 0;
-			var day = 0;
-			for(var i=0; i<3; i++){
-				if (isNaN(check[i])){
-					console.log('i: '+ i +', month may be '+ check[i] );
-					month = check[i];
-				}				
-				else if (!isNaN (check[i]) && check[i]>31){
-					console.log('i: '+ i +', year may be '+ check[i] );
-					year = check[i];
-				}
-				else {
-					day = check[i];
-				}
-			}
-		}
-		var newDateString = month + '-' + day + '-' + year;
-		if (moment(newDateString).isValid()){
-			var date = moment(newDateString, 'MMMM-DD-YYYY');
-			unixDate = date.format('X');
-			naturalDate = date.format("MMMM D, YYYY");	
-		}			
-	}
-
-	if (data) {
-		res.json({
-			unix: unixDate,
-			natural: naturalDate
-		});
-	} else {
-		res.status(404).send();
-	}
+// get route, rendering the results to the template
+app.get('/', function(req, res) {	
+	res.render("index", {
+		passedString: globalString,
+		passedUnix: globalUnixDate,
+		passedNatural: globalNaturalDate
+	});
 });
 
-app.listen(process.env.PORT, process.env.IP, function(){
-    console.log('Server started!');
+// post route, receiving the form input string and calculating the date
+app.post('/results', function(req, res) {
+	
+	var reqData = req.body.stringFromForm;
+	
+	var results = calculateDate(reqData);
+
+	globalUnixDate = results.unixOut;
+	globalNaturalDate = results.naturalOut;
+
+	res.redirect('/');	
+});
+
+app.listen(PORT, process.env.IP, function(){
+    console.log('Server started on port', PORT);
 })
