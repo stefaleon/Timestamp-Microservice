@@ -1,5 +1,7 @@
-Timestamp Microservice
+#Timestamp Microservice
 
-User Story: I can pass a string as a parameter, and it will check to see whether that string contains either a unix timestamp or a natural language date (example: January 1, 2016).
-User Story: If it does, it returns both the Unix timestamp and the natural language form of that date.
-User Story: If it does not contain a date or Unix timestamp, it returns null for those properties.
+* Pass a string as a request parameter, and it will be checked to see whether it contains either a Unix timestamp or a natural language date (example: January 1, 2016).
+* If it does, both the Unix timestamp and the natural language form of that date are returned.
+* If it does not contain a date or Unix timestamp, null is returned for those properties.
+
+## Deployed in https://timestamp-microservice-ls.herokuapp.com/
