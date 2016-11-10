@@ -5,7 +5,7 @@ var calculateDate = function(data){
 	var datafixed = '';
 	var check = ['a'];
 
-	globalString = data; //to start with, testing purposes
+	var globalString = data; //to start with, testing purposes
 	console.log(data);
 
 	// check for negative single number

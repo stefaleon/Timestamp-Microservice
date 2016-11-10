@@ -22,6 +22,24 @@ app.get('/', function(req, res) {
 	});
 });
 
+// main api route, returns the dates json object
+app.get('/:aString', function(req, res) {
+	
+	var reqData = req.params.aString;
+	
+	var results = calculateDate(reqData);
+
+	globalUnixDate = results.unixOut;
+	globalNaturalDate = results.naturalOut;
+
+	var apiResults = {
+		unix: globalUnixDate,
+		natural: globalNaturalDate
+	}
+
+	res.json(apiResults);	
+});
+
 // post route, receiving the form input string and calculating the date
 app.post('/results', function(req, res) {
 	
