@@ -29,7 +29,7 @@ app.get('/:aString', function(req, res) {
 	
 	var results = calculateDate(reqData);
 
-	globalUnixDate = results.unixOut;
+	globalUnixDate = parseInt(results.unixOut);
 	globalNaturalDate = results.naturalOut;
 
 	var apiResults = {
