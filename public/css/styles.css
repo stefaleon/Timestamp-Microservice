@@ -16,3 +16,7 @@ h1 {
 .well.wellmtop{
 	margin-top: 40px;
 }
+
+code {
+	font-size: 0.93em;
+}

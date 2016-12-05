@@ -14,7 +14,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3 well wellmtop">
-					<h1 id="timestamp" class="text-center">Timestamp Microservice</h1>
+
+					<h3 id="timestamp" class="text-center">Timestamp Microservice</h3>
 					<hr />
 					<ol><li> Pass a string as a parameter, and it will be checked to see whether it contains either a Unix timestamp or a natural language date (example: January 1, 2016).</li>
 					<li> If it does, both the Unix timestamp and the natural language form of that date are returned.</li>
@@ -22,8 +23,8 @@
 					<hr />
 					<div class="text-center">
 						<!-- results show up here -->
-						<h2> Unix Date: <%= passedUnix %> </h2>
-						<h2> Date: <%= passedNatural %> </h2>
+						<h4> Unix Date: <%= passedUnix %> </h4>
+						<h4> Date: <%= passedNatural %> </h4>
 					</div>	
 					<hr />
 					<form action="/results" method="post" id="message-form">
@@ -41,11 +42,25 @@
 						</div>		
 					</form>
 					<hr />
-					<ul>
-						<li>Example usage: <br />https://timestamp-microservice-ls.herokuapp.com/Nov, 5, 1605 <br /> https://timestamp-microservice-ls.herokuapp.com/-11491632000</li>
-						<li>Example output: <br />
-						{ "unix": -11491632000, "natural": "November 5, 1605" } </li>
-					</ul>	
+						<h4> API Usage </h4>
+					
+						<p>Example unix from natural: <br />
+							<code><a href="https://timestamp-microservice-ls.herokuapp.com/Nov, 5, 1605">
+						 		https://timestamp-microservice-ls.herokuapp.com/Nov, 5, 1605
+						 	</a></code>
+						</p>
+
+						<p>Example natural from unix: <br />
+							<code><a href="https://timestamp-microservice-ls.herokuapp.com/-11491632000">
+						 		https://timestamp-microservice-ls.herokuapp.com/-11491632000
+						 	</a></code>
+						</p>
+						
+						<br />
+						<p>Example output: <br />
+							<code>{ "unix": -11491632000, "natural": "November 5, 1605" }</code>
+						</p>
+						
 				</div>
 			</div>	
 		</div>

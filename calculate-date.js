@@ -3,7 +3,7 @@ var moment = require('moment');
 var calculateDate = function(data){
 
 	var datafixed = '';
-	var check = ['a'];
+	var check = [1234567890];
 
 	var globalString = data; //to start with, testing purposes
 	console.log(data);
